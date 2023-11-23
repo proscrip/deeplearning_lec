@@ -58,7 +58,7 @@ df['activity']=le.fit_transform(df['activity'])
 
 from sklearn.model_selection import train_test_split
 
-X_train, X_test = train_test_split(df, test_size=0.25, random_state=42)
+X_train, X_test = train_test_split(df, test_size=0.5, random_state=42)
 
 
 
@@ -117,7 +117,7 @@ history = autoencoder.fit(X_train_ft, X_train_ft,
                     epochs=nb_epoch,
                     batch_size=batch_size,
                     shuffle=True,
-                    validation_split=0.1,
+                    validation_split=0.01,
                     verbose=1,
                     callbacks=[checkpointer, tensorboard]).history
 
@@ -144,7 +144,7 @@ from sklearn.metrics import (confusion_matrix, precision_recall_curve, auc,
                              roc_curve, recall_score, classification_report, f1_score,
                              precision_recall_fscore_support)
 
-threshold = 0.73
+threshold = -0.0005
 
 
 y_pred = [0 if e > threshold else 1 for e in error_df.reconstruction_error.values]
